@@ -1,14 +1,14 @@
-const maxDays = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+const maxDaysInMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
 
-function isValidDate(userDate) {
+function isValidDate(userInput) {
   // First, check if the string matches dd/mm/yyyy pattern
   const datePattern = /^\d{2}\/\d{2}\/\d{4}$/
-  if (!datePattern.test(userDate)) {
+  if (!datePattern.test(userInput)) {
     console.log("Not a valid date format (dd/mm/yyyy)")
     return false
   }
-  const [day, month] = userDate.split("/").map(Number)
-  if (day <= 0 || day > maxDays[month - 1]) {
+  const [day, month] = userInput.split("/").map(Number)
+  if (day <= 0 || day > maxDaysInMonth[month - 1]) {
     console.log("Invalid date")
     return false
   }
@@ -52,20 +52,19 @@ function findNextPalindrome(palindromeToFind, currentDate) {
 }
 
 // ---- Example usage ----
-const userDate = prompt(
+const userInput = prompt(
   "Enter a date (dd/mm/yyyy) or any string to check for palindrome:"
 )
 
-console.log("User Input is :", userDate)
+console.log("User Input is :", userInput)
 
-// First check if input is a date
-if (isValidDate(userDate)) {
+if (isValidDate(userInput)) {
   // Only ask for number of palindromes if it's a valid date
   const palindromeCount = parseInt(prompt("How many next palindromes?"), 10)
-  findNextPalindrome(palindromeCount, userDate)
+  findNextPalindrome(palindromeCount, userInput)
 } else {
   // For strings or invalid dates, just check if it's a palindrome
-  if (isPalindrome(userDate)) {
+  if (isPalindrome(userInput)) {
     console.log("The string is a palindrome!")
   } else {
     console.log("The string is not a palindrome.")
